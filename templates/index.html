@@ -1,0 +1,49 @@
+{% extends "layout.html" %} {% block body %}
+  <body>
+    <div class="uk-container uk-container-expand">
+      <div uk-grid>
+        <div class="uk-width-1-4 uk-padding">
+          <ul id="lists">
+            <a href="/all_categories">
+              <button class="uk-button uk-button-secondary">
+                Create categories
+              </button>
+            </a>
+            <br/>
+            <br/>
+            {% for list in lists %}
+              <li>
+                <a class="uk-link-text" href="/lists/{{list.id}}">
+                  {{ list.name }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="uk-width-3-4 uk-padding">
+          <form id="form">
+            <input type="text" id="description" name="description"/>
+            <input type="submit" value="Crear una tarea"  class="uk-button uk-button-secondary uk-button-small" />
+          </form>
+          <div id ="error" class="hidden">Ocurrió un error!!</div>
+          <ul id="todos">
+            {% for todo in todos %}
+            <li> 
+              <input 
+                type="checkbox" 
+                data-id="{{todo.id}}" 
+                class="check-completed" 
+                {% if todo.completed %} checked {% endif %}
+              /> 
+              <input type="text" value="{{todo.description}}" class="todo_desc">
+              <i class="far fa-trash-alt delete-button" data-id="{{todo.id}}"></i>
+              <i class="far fa-edit update-button" data-id="{{todo.id}}"></i>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+<script src="{{url_for('static', filename = 'js/todos.js')}}"></script>
+{% endblock %}

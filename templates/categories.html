@@ -1,0 +1,34 @@
+{% extends "layout.html" %} {% block body %}
+<body>
+  <div class="uk-container uk-container-expand">
+    <div uk-grid>
+      <div class="uk-width-1-4 uk-padding">
+        <ul id="lists">
+          <li>
+            <a class="uk-link-text" href="/">
+              Home
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="uk-width-3-4 uk-padding">
+        <form id="form">
+          <input type="text" id="category" name="category" />
+          <input type="submit" value="Crear una catedoria" class="uk-button uk-button-secondary uk-button-small" />
+        </form>
+        <div id ="error" class="hidden">Ocurrió un error!!</div>
+        <ul id="todos">
+          {% for cat in categories %}
+          <li> 
+            <input type="text" value="{{cat.name}}" class="todo_cat">
+            <i class="far fa-trash-alt delete-button" data-id="{{cat.id}}"></i>
+            <i class="far fa-edit update-button" data-id="{{cat.id}}"></i>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="{{url_for('static', filename = 'js/categories.js')}}"></script>
+{% endblock %}
